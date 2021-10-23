@@ -30,17 +30,13 @@ jobs:
           node-version: '16'
           cache: 'npm'
 
-      # yarn을 설치합니다.
-      - name: Install Yarn
-        run: npm install yarn
-
       # 설치된 yarn을 통해 패키지를 설치합니다.
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       # 테스트 수행과 그 테스트 결과를 xml파일로 생성합니다.
       - name: Run tests
-        run: yarn test:report
+        run: npm test:report
 
       # 테스트 결과를 담은 xml 파일을 레포트로 변환합니다.
       - name: Test Report
