@@ -19,7 +19,6 @@ export class InvalidQueryException extends HttpException {
   public message = message;
 
   constructor() {
-    // TODO : status 제거
-    super({ status, statusCode: status, message }, status);
+    super({ statusCode: status, message }, status);
   }
 }

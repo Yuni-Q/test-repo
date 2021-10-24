@@ -20,10 +20,6 @@ export class RequireTokenException extends HttpException {
   public message = message;
 
   constructor() {
-    super(
-      // TODO : status 제거
-      { status, statusCode: status, message },
-      status,
-    );
+    super({ statusCode: status, message }, status);
   }
 }

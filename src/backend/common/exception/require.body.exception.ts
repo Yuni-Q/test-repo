@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 const status = HttpStatus.PRECONDITION_FAILED;
 const message = '필수 파라이터가 없습니다.';
+
 export class RequireBodyException extends HttpException {
   @ApiProperty({
     example: status,
@@ -19,7 +20,6 @@ export class RequireBodyException extends HttpException {
   public message = message;
 
   constructor() {
-    // TODO : status 제거
-    super({ status, statusCode: status, message }, status);
+    super({ statusCode: status, message }, status);
   }
 }

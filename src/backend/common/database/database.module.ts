@@ -1,10 +1,5 @@
 import { Module, Global, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Answer } from 'src/backend/common/entity/Answer.entity';
-import { File } from 'src/backend/common/entity/File.entity';
-import { Mission } from 'src/backend/common/entity/Mission.entity';
-import { Question } from 'src/backend/common/entity/Question.entity';
-import { User } from 'src/backend/common/entity/User.entity';
 
 import { EnvModule } from '../env/env.module';
 import { EnvService } from '../env/env.service';
@@ -24,7 +19,7 @@ function DatabaseOrmModule(): DynamicModule {
           synchronize: false,
           logging: true,
           timezone: '+09:00',
-          entities: [User, Answer, File, Mission, Question], // 설정 부분
+          entities: [], // 설정 부분
         }
       : {
           keepConnectionAlive: true,
@@ -33,7 +28,7 @@ function DatabaseOrmModule(): DynamicModule {
           logging: false,
           verboseRetryLog: false,
           synchronize: true,
-          entities: [User, Answer, File, Mission, Question], // 설정 부분
+          entities: [], // 설정 부분
         },
   );
 }

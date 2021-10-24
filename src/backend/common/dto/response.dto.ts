@@ -6,13 +6,6 @@ const status = HttpStatus.OK;
 export class ResponseDto {
   @ApiProperty({
     example: status,
-    description: 'http 상태 코드',
-    required: true,
-  })
-  public status?: number;
-
-  @ApiProperty({
-    example: status,
     description: 'custom 상태 코드',
     required: true,
   })

@@ -1,10 +1,8 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { Answer } from './Answer.entity';
-
-@Entity('users', { schema: 'chocopie' })
+@Entity('users', { schema: 'yuniq' })
 export class User {
   @ApiProperty({
     example: '1',
@@ -15,7 +13,7 @@ export class User {
   id: number;
 
   @ApiProperty({
-    example: '2020-03-18',
+    example: '2021-10-24',
     description: '유저의 생일 입니다.',
   })
   @IsString({ message: 'birthday 값이 올바르지 않습니다.' })
@@ -23,7 +21,7 @@ export class User {
   birthday: string | null;
 
   @ApiProperty({
-    example: 'moti@gmail.com',
+    example: 'yuniq@gmail.com',
     description: '유저의 이메일 입니다.',
   })
   @IsEmail()
@@ -31,7 +29,7 @@ export class User {
   email: string | null;
 
   @ApiProperty({
-    example: '모티',
+    example: 'yuniq',
     description: '유저의 이름 입니다.',
   })
   @IsString({ message: 'name 값이 올바르지 않습니다.' })
@@ -47,23 +45,8 @@ export class User {
   gender: string | null;
 
   @ApiProperty({
-    example: '2021-03-22',
-    description: '유저의 미션 새로고침 일자 입니다.',
-  })
-  @IsString()
-  @Column('varchar', { name: 'refreshDate', nullable: true, length: 255 })
-  refreshDate: string | null;
-
-  @ApiProperty({
-    example: 'refreshToken',
-    description: '유저의 refreshToken 입니다.',
-  })
-  @IsString()
-  @Column('varchar', { name: 'refreshToken', nullable: true, length: 255 })
-  refreshToken: string | null;
-
-  @ApiProperty({
-    enum: ['apple', 'google', 'web'],
+    enum: ['google'],
+    description: '유저의 snsId와 snsType 값의 합은 유니한 값 입니다.',
   })
   @IsString()
   @Column('varchar', { name: 'snsId', nullable: true, length: 255 })
@@ -78,7 +61,7 @@ export class User {
   snsType: string | null;
 
   @ApiProperty({
-    example: 'https://cdn.moti.company/J9smJXN7',
+    example: 'https://yuniq.com/J9smJXN7',
     description: '유저의 프로필 이미지 주소 입니다.',
   })
   @IsString()
@@ -100,21 +83,4 @@ export class User {
   @IsString()
   @UpdateDateColumn({ type: 'datetime', name: 'updatedAt' })
   updatedAt: Date;
-
-  @ApiProperty({
-    example: '2020-02-28 00:08:15',
-    description: '유저에게 할당 된 미션 입니다.',
-  })
-  @IsString()
-  @Column('text', { name: 'mission', nullable: true })
-  mission: string | null;
-
-  @ApiProperty({
-    type: Answer,
-    isArray: true,
-  })
-  @OneToMany(() => Answer, (answers) => answers.user)
-  answers: Answer[];
 }
-
-export class OmitUser extends OmitType(User, ['answers']) {}
